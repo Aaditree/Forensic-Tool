@@ -1,12 +1,14 @@
 import streamlit as st
 import pickle
+import sklearn
 from sklearn.feature_extraction.text import CountVectorizer
 import numpy as np
 import smtplib
 import time
 import imaplib
 import email
-import traceback 
+import traceback
+import bs4
 from bs4 import BeautifulSoup
 import csv
 from email import policy
