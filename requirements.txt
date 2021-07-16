@@ -6,3 +6,6 @@ tensorflow-cpu==2.4.0
 seaborn==0.11.1
 Pillow==8.1.0
 scikit-learn
+requests
+email
+bs4
