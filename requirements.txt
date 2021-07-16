@@ -9,4 +9,4 @@ Pillow==8.1.0
 scikit-learn
 requests
 bs4
-pywin32
+pypiwin32
