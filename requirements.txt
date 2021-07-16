@@ -9,3 +9,4 @@ scikit-learn
 requests
 bs4
 pypiwin32
+sklearn
