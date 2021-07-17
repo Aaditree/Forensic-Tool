@@ -32,8 +32,6 @@ FROM_PWD = "clear.access123@@@"
 SMTP_SERVER = "imap.gmail.com" 
 SMTP_PORT = 993
 
-ll=[]
-full=[]
 
 
 def get_binary_file_downloader_html(bin_file, file_label='File'):
@@ -45,6 +43,9 @@ def get_binary_file_downloader_html(bin_file, file_label='File'):
 
 def read_email_from_gmail():
         
+	ll=[]
+	full=[]
+
         mail = imaplib.IMAP4_SSL(SMTP_SERVER)
         mail.login(FROM_EMAIL,FROM_PWD)
         
