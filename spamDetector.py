@@ -148,7 +148,7 @@ def main():
 					csvwriter.writerow(['text','spam/not spam'])
 					csvwriter.writerows(row)
 
-			csv_buffer = BytesIO(csv_bytes)
+			csv_buffer = BytesIO(filename)
 
 
 			content_type = "application/csv"
