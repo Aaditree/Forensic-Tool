@@ -32,6 +32,12 @@ FROM_PWD = "clear.access123@@@"
 SMTP_SERVER = "imap.gmail.com" 
 SMTP_PORT = 993
 
+def get_table_download_link(df):
+    csv = df.to_csv(index=False)
+    b64 = base64.b64encode(
+        csv.encode()
+    ).decode()  # some strings <-> bytes conversions necessary here
+    return f'<a href="data:file/csv;base64,{b64}" download="Classification.csv">Download csv file</a>'
 
 
 def get_binary_file_downloader_html(bin_file, file_label='File'):
@@ -143,7 +149,8 @@ def main():
 					csvwriter.writerows(row)
 			df=pd.read_csv(filename)
 			if df.empty==False:
-				st.markdown(get_binary_file_downloader_html(filename, 'Classification'), unsafe_allow_html=True)
+				st.markdown(get_table_download_link(df), unsafe_allow_html=True)
+
 			
 
 			
