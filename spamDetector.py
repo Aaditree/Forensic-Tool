@@ -1,6 +1,5 @@
 import streamlit as st
 import pickle
-from sklearn.feature_extraction.text import CountVectorizer
 import numpy as np
 import smtplib
 import time
@@ -11,7 +10,6 @@ from bs4 import BeautifulSoup
 import csv
 from email import policy
 from datetime import datetime
-from win32com.client import Dispatch
 import requests
 import json
 import os
@@ -99,9 +97,7 @@ def spam_not_spam(lst):
 			
 
 
-def speak(text):
-	speak=Dispatch(("SAPI.SpVoice"))
-	speak.Speak(text)
+
 
 
 model = pickle.load(open('spam.pkl','rb'))
