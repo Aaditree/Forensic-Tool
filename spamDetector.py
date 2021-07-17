@@ -137,7 +137,7 @@ def main():
 			if df.empty == True:
         				os.remove(filename)
 
-	elif choices=="Manual Forensic Classification":
+	if choices=="Manual Forensic Classification":
 		now = datetime.now()
 		nw=now.strftime("%d %m %Y %H %M %S")
 		filename='forensic_file_'+str(nw)+'.csv'
