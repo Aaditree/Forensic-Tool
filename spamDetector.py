@@ -100,11 +100,6 @@ def spam_not_spam(lst):
 			
 
 
-'''def speak(text):
-	speak=Dispatch(("SAPI.SpVoice"))
-	speak.Speak(text)'''
-
-
 model = pickle.load(open('spam.pkl','rb'))
 cv=pickle.load(open('vectorizer.pkl','rb'))
 
