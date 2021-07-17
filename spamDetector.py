@@ -15,6 +15,7 @@ import requests
 import json
 import os
 import pandas as pd
+import base64
 
 url = "https://www.fast2sms.com/dev/bulk"
 
@@ -34,18 +35,13 @@ SMTP_PORT = 993
 ll=[]
 full=[]
 
-def get_minio_link(buffer, filename, content_type, bucket_name):
-    minio_client.put_object(
-        bucket_name,
-        filename,
-        data=buffer,
-        length=len(buffer.getvalue()),
-        content_type=content_type,
-    )
-    download_url = minio_client.presigned_get_object(
-                                       bucket_name,
-                                       filename)
-    return download_url
+
+def get_binary_file_downloader_html(bin_file, file_label='File'):
+    with open(bin_file, 'rb') as f:
+        data = f.read()
+    bin_str = base64.b64encode(data).decode()
+    href = f'<a href="data:application/octet-stream;base64,{bin_str}" download="{os.path.basename(bin_file)}">Download {file_label}</a>'
+    return href
 
 def read_email_from_gmail():
         
@@ -125,7 +121,6 @@ def main():
 	if choices=="Automatic Forensic Classification":
 		
 		while(choices=="Automatic Forensic Classification"):
-      
 			now = datetime.now()
 			nw=now.strftime("%d %m %Y %H %M %S")
 			filename='forensic_file_'+str(nw)+'.csv'
@@ -147,16 +142,10 @@ def main():
 					csvwriter=csv.writer(csvfile)
 					csvwriter.writerow(['text','spam/not spam'])
 					csvwriter.writerows(row)
-
-			csv_buffer = BytesIO(filename)
-
-
-			content_type = "application/csv"
-
-			uri = get_minio_link(buffer=csv_buffer, filename=filename, content_type=content_type, bucket_name="my-bucket")
-
-			st.markdown(f"""<a href='{uri}' download>Click to Download {filename}</a>""",unsafe_allow_html=True,)			
+			
+			st.markdown(get_binary_file_downloader_html(filename, 'Classification'), unsafe_allow_html=True)
 			
 
+			
 		
 main()
