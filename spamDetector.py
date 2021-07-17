@@ -147,6 +147,9 @@ def main():
 					csvwriter.writerow(['text','spam/not spam'])
 					csvwriter.writerows(row)
 
+			csv_buffer = BytesIO(csv_bytes)
+
+
 			content_type = "application/csv"
 
 			uri = get_minio_link(buffer=csv_buffer, filename=filename, content_type=content_type, bucket_name="my-bucket")
