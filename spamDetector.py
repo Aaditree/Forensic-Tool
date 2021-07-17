@@ -42,8 +42,8 @@ def get_binary_file_downloader_html(bin_file, file_label='File'):
     return href
 
 def read_email_from_gmail():
-	ll=[]
-	full=[]
+        ll=[]
+        full=[]
         mail = imaplib.IMAP4_SSL(SMTP_SERVER)
         mail.login(FROM_EMAIL,FROM_PWD)
         
