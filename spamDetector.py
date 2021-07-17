@@ -30,11 +30,11 @@ FROM_PWD = "clear.access123@@@"
 SMTP_SERVER = "imap.gmail.com" 
 SMTP_PORT = 993
 
-
+ll=[]
+full=[]
+        
 def read_email_from_gmail():
         
-        ll=[]
-        full=[]
         mail = imaplib.IMAP4_SSL(SMTP_SERVER)
         mail.login(FROM_EMAIL,FROM_PWD)
         
@@ -132,10 +132,14 @@ def main():
 			with open(filename,'w') as csvfile:
 					csvwriter=csv.writer(csvfile)
 					csvwriter.writerow(['text','spam/not spam'])
-					csvwriter.writerows(row)			
-			df= pd.read_csv(filename)
-			if df.empty == True:
-        				os.remove(filename)
+					csvwriter.writerows(row)
+
+			content_type = "application/csv"
+
+			uri = get_minio_link(buffer=csv_buffer, filename=filename, content_type=content_type, bucket_name="my-bucket")
+
+			st.markdown(f"""<a href='{uri}' download>Click to Download {filename}</a>""",unsafe_allow_html=True,)			
+			
 
 		
 main()
