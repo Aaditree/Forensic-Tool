@@ -32,7 +32,20 @@ SMTP_PORT = 993
 
 ll=[]
 full=[]
-        
+
+def get_minio_link(buffer, filename, content_type, bucket_name):
+    minio_client.put_object(
+        bucket_name,
+        filename,
+        data=buffer,
+        length=len(buffer.getvalue()),
+        content_type=content_type,
+    )
+    download_url = minio_client.presigned_get_object(
+                                       bucket_name,
+                                       filename)
+    return download_url
+
 def read_email_from_gmail():
         
         mail = imaplib.IMAP4_SSL(SMTP_SERVER)
