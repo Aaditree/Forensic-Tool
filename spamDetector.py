@@ -11,6 +11,7 @@ from bs4 import BeautifulSoup
 import csv
 from email import policy
 from datetime import datetime
+from win32com.client import Dispatch
 import requests
 import json
 import os
@@ -31,10 +32,11 @@ FROM_PWD = "clear.access123@@@"
 SMTP_SERVER = "imap.gmail.com" 
 SMTP_PORT = 993
 
-ll=[]
-full=[]
 
 def read_email_from_gmail():
+        
+        ll=[]
+        full=[]
         mail = imaplib.IMAP4_SSL(SMTP_SERVER)
         mail.login(FROM_EMAIL,FROM_PWD)
         
@@ -97,6 +99,9 @@ def spam_not_spam(lst):
 			
 
 
+def speak(text):
+	speak=Dispatch(("SAPI.SpVoice"))
+	speak.Speak(text)
 
 
 model = pickle.load(open('spam.pkl','rb'))
@@ -105,11 +110,11 @@ cv=pickle.load(open('vectorizer.pkl','rb'))
 
 def main():
 	st.markdown("<h1 style='text-align: center; color: red;'>Email Spam Classification</h1>", unsafe_allow_html=True)
-	activites=["Forensic Classification","Contact Us"]
-	choices=st.sidebar.selectbox("Choose method",activites)
+	activites=["Automatic Forensic Classification"]
+	choices=st.sidebar.selectbox("Available Methods",activites)
 	if choices=="Automatic Forensic Classification":
 		
-		while(choices=="Forensic Classification"):
+		while(choices=="Automatic Forensic Classification"):
       
 			now = datetime.now()
 			nw=now.strftime("%d %m %Y %H %M %S")
@@ -132,9 +137,9 @@ def main():
 					csvwriter=csv.writer(csvfile)
 					csvwriter.writerow(['text','spam/not spam'])
 					csvwriter.writerows(row)			
-			
-	elif choices=="Contact Us":
-			st.success("IN CASE OF ANY DOUBTS: Reach out to us at ")
-			st.success("Email: clearedaccess@gmail.com")
-	
+			df= pd.read_csv(filename)
+			if df.empty == True:
+        				os.remove(filename)
+
+		
 main()
