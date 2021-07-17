@@ -1,19 +1,17 @@
 import streamlit as st
 import pickle
-import sklearn
 from sklearn.feature_extraction.text import CountVectorizer
 import numpy as np
 import smtplib
 import time
 import imaplib
 import email
-import traceback
-import bs4
+import traceback 
 from bs4 import BeautifulSoup
 import csv
 from email import policy
 from datetime import datetime
-#from win32com.client import Dispatch
+from win32com.client import Dispatch
 import requests
 import json
 import os
@@ -100,17 +98,22 @@ def spam_not_spam(lst):
 			
 
 
+def speak(text):
+	speak=Dispatch(("SAPI.SpVoice"))
+	speak.Speak(text)
+
+
 model = pickle.load(open('spam.pkl','rb'))
 cv=pickle.load(open('vectorizer.pkl','rb'))
 
 
 def main():
-	st.title("Email Spam Classification")
-	activites=["Automatic Forensic Classification","Manual Forensic Classification"]
+	st.markdown("<h1 style='text-align: center; color: red;'>Email Spam Classification</h1>", unsafe_allow_html=True)
+	activites=["Forensic Classification","Contact Us"]
 	choices=st.sidebar.selectbox("Choose method",activites)
 	if choices=="Automatic Forensic Classification":
 		
-		while(choices=="Automatic Forensic Classification"):
+		while(choices=="Forensic Classification"):
       
 			now = datetime.now()
 			nw=now.strftime("%d %m %Y %H %M %S")
@@ -133,46 +136,9 @@ def main():
 					csvwriter=csv.writer(csvfile)
 					csvwriter.writerow(['text','spam/not spam'])
 					csvwriter.writerows(row)			
-			df= pd.read_csv(filename)
-			if df.empty == True:
-        				os.remove(filename)
-
-	if choices=="Manual Forensic Classification":
-		now = datetime.now()
-		nw=now.strftime("%d %m %Y %H %M %S")
-		filename='forensic_file_'+str(nw)+'.csv'
-		print("Checking..." + "\n")
-		print("Click on Process to get results")
-		lst=[]
-		
-
-		if st.button("PROCESS"):
-			row=[]
-			lst=read_email_from_gmail()
-			for data in lst:
-				print(data)
-				vec=cv.transform(data).toarray()
-				result=model.predict(vec)
-				if result[0]==0:
-					st.success("This is Not A Spam Email")
-					row.append([data,'Not Spam'])
-	
-				else:
-					st.error("This is A Spam Email")
-					row.append([data,'Spam'])
-					
-
-			with open(filename,'w') as csvfile:
-					csvwriter=csv.writer(csvfile)
-					csvwriter.writerow(['text','spam/not spam'])
-					csvwriter.writerows(row)
-			df= pd.read_csv(filename)
-			if df.empty == True:
-					os.remove(filename)
 			
-			
-		if st.button("STOP"):
-				st.empty()	
-	
+	elif choices=="Contact Us":
+			st.success("IN CASE OF ANY DOUBTS: Reach out to us at ")
+			st.success("Email: clearedaccess@gmail.com")
 	
 main()
