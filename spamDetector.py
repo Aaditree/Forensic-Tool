@@ -142,8 +142,9 @@ def main():
 					csvwriter=csv.writer(csvfile)
 					csvwriter.writerow(['text','spam/not spam'])
 					csvwriter.writerows(row)
-			
-			st.markdown(get_binary_file_downloader_html(filename, 'Classification'), unsafe_allow_html=True)
+			df=pd.read_csv(filename)
+			if df.empty==False:
+				st.markdown(get_binary_file_downloader_html(filename, 'Classification'), unsafe_allow_html=True)
 			
 
 			
