@@ -1,0 +1,23 @@
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn import metrics
+from sklearn import feature_extraction
+from sklearn.feature_extraction.text import CountVectorizer
+
+cv=CountVectorizer()
+
+y=data['class']
+y=y.astype('int')
+X= cv.fit_transform(data["message"])
+
+X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.2,random_state=42)
+
+model = RandomForestClassifier(n_estimators=150,max_depth=None,n_jobs=-1)
+
+model.fit(X_train, y_train)
+
+prediction = model.predict(X_test)
+
+print("Prediction: ",prediction)
+
+print("Accuracy: ",metrics.accuracy_score(y_test,prediction))
