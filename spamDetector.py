@@ -26,9 +26,9 @@ headers = {
 }
 
 
-FROM_EMAIL = st.text_input("Email", "Enter email") 
-FROM_PWD = st.text_input("Password", "Enter password") 
-Phone = st.text_input("Phone number to send alerts to", "Enter phone number")
+FROM_EMAIL = st.text_input("Email", "") 
+FROM_PWD = st.text_input("Password", "") 
+Phone = st.text_input("Phone number to send alerts to", "")
 SMTP_SERVER = "imap.gmail.com" 
 SMTP_PORT = 993
 
