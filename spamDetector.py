@@ -124,7 +124,7 @@ def main():
 	st.markdown("<h1 style='text-align: center; color: red;'>Email Spam Classification</h1>", unsafe_allow_html=True)
 	st.success("Welcome")
 	st.success("To begin: type OK")
-	Okay = st.text_input("Confirm", "") 
+	Okay = st.text_input("To Confirm, write 'OK' ", "") 
 			
 	if Okay=="OK":
 		
