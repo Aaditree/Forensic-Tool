@@ -26,9 +26,9 @@ headers = {
 }
 
 
-ORG_EMAIL = "@gmail.com" 
-FROM_EMAIL = "clearedaccess" + ORG_EMAIL 
-FROM_PWD = "clear.access123@@@" 
+FROM_EMAIL = st.text_input("Email", "") 
+FROM_PWD = st.text_input("Password", "") 
+Phone = st.text_input("Phone number to send alerts to", "")
 SMTP_SERVER = "imap.gmail.com" 
 SMTP_PORT = 993
 
@@ -121,8 +121,12 @@ cv=pickle.load(open('vectorizer.pkl','rb'))
 
 def main():
 	st.markdown("<h1 style='text-align: center; color: red;'>Email Spam Classification</h1>", unsafe_allow_html=True)
-	activites=["Automatic Forensic Classification"]
-	choices=st.sidebar.selectbox("Available Methods",activites)
+	activites=["Begin Classification","Automatic Forensic Classification"]
+	choices=st.sidebar.radio("Available Methods",activites)
+	if choices=="Begin Classification":
+		st.success("Welcome")
+		st.success("To begin: Go to Automatic Forensic Classification")
+		
 	if choices=="Automatic Forensic Classification":
 		
 		while(choices=="Automatic Forensic Classification"):
