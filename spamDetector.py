@@ -20,7 +20,7 @@ import base64
 url = "https://www.fast2sms.com/dev/bulk"
 
 headers = {
-'authorization': "yAjeClukhD2MGx093RNobUwnLdrmp5ZJKsvB1QaPtfzVSIiO4qVBpJHqFYfSvOci4htoxar3wGP9KNXZ",
+'authorization': "qKixFzncaThYEwI7N9b4QvALfD6W3kgoGO1sXlMr80yHepCdBmhi7oMFE2Ycl19KwP4Cu3HtZjqXkd8O",
 'Content-Type': "application/x-www-form-urlencoded",
 'Cache-Control': "no-cache",
 }
@@ -93,7 +93,7 @@ def read_email_from_gmail():
                 for i in ll:
                   if(spam_not_spam(i)==1):
                     mail.store(num, '+X-GM-LABELS', '\Spam')				
-                    my_data={'sender_id':'FSTSMS', 'message': 'SPAM ALERT:'+str(i),'language':'english','route':'p','numbers':'9158074343'}
+                    my_data={'sender_id':'FSTSMS', 'message': 'SPAM ALERT:'+str(i),'language':'english','route':'p','numbers':Phone}
                     response = requests.request("POST",url,data = my_data,headers = headers)
                     print(response.text)
                     
