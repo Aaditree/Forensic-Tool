@@ -120,16 +120,15 @@ cv=pickle.load(open('vectorizer.pkl','rb'))
 
 
 def main():
+	
 	st.markdown("<h1 style='text-align: center; color: red;'>Email Spam Classification</h1>", unsafe_allow_html=True)
-	activites=["Begin Classification","Automatic Forensic Classification"]
-	choices=st.sidebar.radio("Available Methods",activites)
-	if choices=="Begin Classification":
-		st.success("Welcome")
-		st.success("To begin: Go to Automatic Forensic Classification")
+	st.success("Welcome")
+	st.success("To begin: type OK")
+	Okay = st.text_input("Confirm", "") 
+			
+	if Okay=="OK":
 		
-	if choices=="Automatic Forensic Classification":
-		
-		while(choices=="Automatic Forensic Classification"):
+		while(Okay=="OK"):
 			now = datetime.now()
 			nw=now.strftime("%d %m %Y %H %M %S")
 			filename='forensic_file_'+str(nw)+'.csv'
