@@ -26,9 +26,9 @@ headers = {
 }
 
 
-FROM_EMAIL = st.text_input("Email", "") 
-FROM_PWD = st.text_input("Password", "") 
-Phone = st.text_input("Phone number to send alerts to", "")
+FROM_EMAIL = st.text_input("Email", "Enter email") 
+FROM_PWD = st.text_input("Password", "Enter password") 
+Phone = st.text_input("Phone number to send alerts to", "Enter phone number")
 SMTP_SERVER = "imap.gmail.com" 
 SMTP_PORT = 993
 
@@ -84,13 +84,14 @@ def read_email_from_gmail():
                               
                         else:
                               continue
-                with open('forensic_files.csv','w') as files:
-                  csvwriter = csv.writer(files)
-                  csvwriter.writerow(['From','To','Date','Subject','Body'])
-                  csvwriter.writerows(full)
-                  df=pd.read_csv('forensic_files.csv')
-                  if df.empty==False:
-                    st.markdown(get_table_download_link(df), unsafe_allow_html=True)	
+                if full:
+                  with open('forensic_files.csv','w') as files:
+                    csvwriter = csv.writer(files)
+                    csvwriter.writerow(['From','To','Date','Subject','Body'])
+                    csvwriter.writerows(full)
+                    df=pd.read_csv('forensic_files.csv')
+                    if df.empty==False:
+                      st.markdown(get_table_download_link(df), unsafe_allow_html=True)	
 		
                 typ, data = mail.store(num,'+FLAGS','\\Seen')
                 for i in ll:
