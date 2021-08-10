@@ -20,15 +20,15 @@ import base64
 url = "https://www.fast2sms.com/dev/bulk"
 
 headers = {
-'authorization': "qKixFzncaThYEwI7N9b4QvALfD6W3kgoGO1sXlMr80yHepCdBmhi7oMFE2Ycl19KwP4Cu3HtZjqXkd8O",
+'authorization': "yAjeClukhD2MGx093RNobUwnLdrmp5ZJKsvB1QaPtfzVSIiO4qVBpJHqFYfSvOci4htoxar3wGP9KNXZ",
 'Content-Type': "application/x-www-form-urlencoded",
 'Cache-Control': "no-cache",
 }
 
 
-FROM_EMAIL = st.text_input("Email", "") 
-FROM_PWD = st.text_input("Password", "") 
-Phone = st.text_input("Phone number to send alerts to", "")
+FROM_EMAIL = st.text_input("Email", "Enter email") 
+FROM_PWD = st.text_input("Password", "Enter password") 
+Phone = st.text_input("Phone number to send alerts to", "Enter phone number")
 SMTP_SERVER = "imap.gmail.com" 
 SMTP_PORT = 993
 
@@ -75,7 +75,7 @@ def read_email_from_gmail():
                 for part in email_message.walk():
                         if (part.get_content_type() == "text/plain"): # ignore attachments/html
                               body = part.get_payload(decode=True)
-                              full.append([original['From'],original['Subject'],body.decode('utf-8') ])
+                              full.append([original['From'],[original['To'],[original['date'],original['Subject'],body.decode('utf-8') ])
                               fin = body.decode('utf-8')
                               ll.append([fin])
                               print(fin)
@@ -86,14 +86,17 @@ def read_email_from_gmail():
                               continue
                 with open('forensic_files.csv','w') as files:
                   csvwriter = csv.writer(files)
-                  csvwriter.writerow(['From','Subject','Body'])
+                  csvwriter.writerow(['From','To','Date','Subject','Body'])
                   csvwriter.writerows(full)
-
+		  df=pd.read_csv(filename)
+			if df.empty==False:
+				st.markdown(get_table_download_link(df), unsafe_allow_html=True)	
+		
                 typ, data = mail.store(num,'+FLAGS','\\Seen')
                 for i in ll:
                   if(spam_not_spam(i)==1):
                     mail.store(num, '+X-GM-LABELS', '\Spam')				
-                    my_data={'sender_id':'FSTSMS', 'message': 'SPAM ALERT:'+str(i),'language':'english','route':'p','numbers':Phone}
+                    my_data={'sender_id':'FSTSMS', 'message': 'SPAM ALERT:'+str(i),'language':'english','route':'p','numbers':'9158074343'}
                     response = requests.request("POST",url,data = my_data,headers = headers)
                     print(response.text)
                     
@@ -124,7 +127,7 @@ def main():
 	st.markdown("<h1 style='text-align: center; color: red;'>Email Spam Classification</h1>", unsafe_allow_html=True)
 	st.success("Welcome")
 	st.success("To begin: type OK")
-	Okay = st.text_input("To Confirm, write 'OK' ", "") 
+	Okay = st.text_input("Confirm", "") 
 			
 	if Okay=="OK":
 		
