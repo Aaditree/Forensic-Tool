@@ -75,7 +75,7 @@ def read_email_from_gmail():
                 for part in email_message.walk():
                         if (part.get_content_type() == "text/plain"): # ignore attachments/html
                               body = part.get_payload(decode=True)
-                              full.append([original['From'],original['To'],original['date'],original['Subject'],body.decode('utf-8') ])
+                              full.append([original['From'],email_message['To'],email_message['date'],original['Subject'],body.decode('utf-8') ])
                               fin = body.decode('utf-8')
                               ll.append([fin])
                               print(fin)
