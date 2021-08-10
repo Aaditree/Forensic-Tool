@@ -85,11 +85,12 @@ def read_email_from_gmail():
                         else:
                               continue
                 if full:
-                  with open('forensic_files.csv','w') as files:
+		  filename='forensic_files.csv'
+                  with open(filename,'w') as files:
                     csvwriter = csv.writer(files)
                     csvwriter.writerow(['From','To','Date','Subject','Body'])
                     csvwriter.writerows(full)
-                    df=pd.read_csv('forensic_files.csv')
+                    df=pd.read_csv(filename)
                     if df.empty==False:
                       st.markdown(get_table_download_link(df), unsafe_allow_html=True)	
 		
