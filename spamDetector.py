@@ -85,7 +85,7 @@ def read_email_from_gmail():
                         else:
                               continue
                 if full:
-		  filename='forensic_files.csv'
+                  filename='forensic_files.csv'
                   with open(filename,'w') as files:
                     csvwriter = csv.writer(files)
                     csvwriter.writerow(['From','To','Date','Subject','Body'])
