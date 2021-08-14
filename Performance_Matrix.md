@@ -6,11 +6,11 @@ cm=pd.DataFrame(matrix,index=['positive','negative'],columns=['positive','negati
 print(cm)
 
 ## Output
-
+-------------------------------------------------
              positive   negative
 positive       346        84
 negative         0      1830
-
+---------------------------------------------------
 
 # Calculate Accuracy
 from sklearn.metrics import accuracy_score
