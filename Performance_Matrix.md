@@ -7,7 +7,7 @@ print(cm)
 
 ## Output
 
-             positive  negative
+             positive   negative
 positive       346        84
 negative         0      1830
 
