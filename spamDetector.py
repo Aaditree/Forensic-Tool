@@ -84,16 +84,7 @@ def read_email_from_gmail():
                               
                         else:
                               continue
-                if full:
-                  filename='forensic_files.csv'
-                  with open(filename,'w') as files:
-                    csvwriter = csv.writer(files)
-                    csvwriter.writerow(['From','To','Date','Subject','Body'])
-                    csvwriter.writerows(full)
-                    df=pd.read_csv(filename)
-                    if df.empty==False:
-                      st.markdown(get_table_download_link(df), unsafe_allow_html=True)	
-		
+                
                 typ, data = mail.store(num,'+FLAGS','\\Seen')
                 for i in ll:
                   if(spam_not_spam(i)==1):
