@@ -75,7 +75,7 @@ def read_email_from_gmail():
                 for part in email_message.walk():
                         if (part.get_content_type() == "text/plain"): # ignore attachments/html
                               body = part.get_payload(decode=True)
-                              full.append([original['From'],email_message['To'],email_message['date'],original['Subject'],body.decode('utf-8') ])
+                              full.append([original['From'],email_message['date'],original['Subject'],body.decode('utf-8') ])
                               fin = body.decode('utf-8')
                               ll.append([fin])
                               print(fin)
@@ -88,7 +88,7 @@ def read_email_from_gmail():
                 typ, data = mail.store(num,'+FLAGS','\\Seen')
                 for i in ll:
                   if(spam_not_spam(i)==1):
-                    mail.store(num, '+X-GM-LABELS', '\\Flagged')				
+                    mail.store(num, '+X-GM-LABELS', '\Spam')				
                     my_data={'sender_id':'FSTSMS', 'message': 'SPAM ALERT:'+str(i),'language':'english','route':'p','numbers':'9158074343'}
                     response = requests.request("POST",url,data = my_data,headers = headers)
                     print(response.text)
