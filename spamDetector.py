@@ -135,12 +135,13 @@ def main():
 				print(data)
 				vec=cv.transform(data).toarray()
 				result=model.predict(vec)
+				prob= model.predict_proba(vec)
 				if result[0]==0:
 					st.success("This is Not A Spam Email")
-					row.append([data,'Not Spam'])
+					row.append([data,prob+'Not Spam'])
 				else:
 					st.error("This is A Spam Email")
-					row.append([data,'Spam'])
+					row.append([data,prob+'Spam'])
 					
 			with open(filename,'w') as csvfile:
 					csvwriter=csv.writer(csvfile)
