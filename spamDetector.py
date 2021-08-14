@@ -138,14 +138,14 @@ def main():
 				prob= model.predict_proba(vec)
 				if result[0]==0:
 					st.success("This is Not A Spam Email")
-					row.append([data,prob+'Not Spam'])
+					row.append([data,'Not Spam',prob])
 				else:
 					st.error("This is A Spam Email")
-					row.append([data,prob+'Spam'])
+					row.append([data,'Spam',prob])
 					
 			with open(filename,'w') as csvfile:
 					csvwriter=csv.writer(csvfile)
-					csvwriter.writerow(['text','spam/not spam'])
+					csvwriter.writerow(['text','spam/not spam','Probability])
 					csvwriter.writerows(row)
 			df=pd.read_csv(filename)
 			if df.empty==False:
