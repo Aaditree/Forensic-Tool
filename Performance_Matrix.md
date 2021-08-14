@@ -5,11 +5,11 @@ matrix=confusion_matrix(y_test, prediction,labels=[1,0])
 cm=pd.DataFrame(matrix,index=['positive','negative'],columns=['positive','negative'])
 print(cm)
 
-## Output:
+## Output
 
-##             positive  negative
-## positive       346        84
-## negative         0      1830
+             positive  negative
+positive       346        84
+negative         0      1830
 
 
 # Calculate Accuracy
