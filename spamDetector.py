@@ -145,7 +145,7 @@ def main():
 					
 			with open(filename,'w') as csvfile:
 					csvwriter=csv.writer(csvfile)
-					csvwriter.writerow(['text','spam/not spam','Probability])
+					csvwriter.writerow(['text','spam/not spam','Probability'])
 					csvwriter.writerows(row)
 			df=pd.read_csv(filename)
 			if df.empty==False:
