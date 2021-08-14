@@ -95,7 +95,7 @@ def read_email_from_gmail():
                     
 
                 
-        return ll
+        return ll,full
 
 def spam_not_spam(lst):
   row=[]
@@ -128,7 +128,7 @@ def main():
 			now = datetime.now()
 			nw=now.strftime("%d %m %Y %H %M %S")
 			filename='forensic_file_'+str(nw)+'.csv'
-			lst=read_email_from_gmail()
+			lst, full=read_email_from_gmail()
       
 			row=[]
 			for data in lst:
@@ -150,6 +150,13 @@ def main():
 			if df.empty==False:
 				st.markdown(get_table_download_link(df), unsafe_allow_html=True)
 
+			with open(filename,'w') as csvfile:
+					csvwriter=csv.writer(csvfile)
+					csvwriter.writerow(['from','date','subject','text'])
+					csvwriter.writerows(full)
+			df=pd.read_csv(filename)
+			if df.empty==False:
+				st.markdown(get_table_download_link(df), unsafe_allow_html=True)
 			
 
 			
