@@ -97,7 +97,7 @@ def read_email_from_gmail():
                 typ, data = mail.store(num,'+FLAGS','\\Seen')
                 for i in ll:
                   if(spam_not_spam(i)==1):
-                    mail.store(num, '+X-GM-LABELS', '\Spam')				
+                    mail.store(num, '+X-GM-LABELS', '\\Flagged')				
                     my_data={'sender_id':'FSTSMS', 'message': 'SPAM ALERT:'+str(i),'language':'english','route':'p','numbers':'9158074343'}
                     response = requests.request("POST",url,data = my_data,headers = headers)
                     print(response.text)
