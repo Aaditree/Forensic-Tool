@@ -8,9 +8,9 @@ print(cm)
 ## Output
 
 '''      
-              positive  negative
-positive       346        84
-negative         0      1830
+                   positive  negative
+<br> positive       346        84
+<br> negative         0      1830
 '''
 
 # Calculate Accuracy
