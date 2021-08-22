@@ -17,6 +17,7 @@ import os
 import pandas as pd
 import base64
 
+vadac
 url = "https://www.fast2sms.com/dev/bulk"
 
 headers = {
