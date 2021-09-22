@@ -159,6 +159,8 @@ def main():
 			df=pd.read_csv(filename)
 			if df.empty==False:
 				st.markdown(get_table_download_link(df), unsafe_allow_html=True)
+				t = pd.DataFrame(df)
+				st.dataframe(t)
 			
 
 			
